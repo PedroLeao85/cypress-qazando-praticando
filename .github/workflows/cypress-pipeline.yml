@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout/Clone do projeto
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Run testes
-        uses: cypress-io/github-action@v7
+        uses: cypress-io/github-action@v6
         with:
           record: true
         env: 
