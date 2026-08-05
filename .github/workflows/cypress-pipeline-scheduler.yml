@@ -1,0 +1,32 @@
+name: Run Basic Testes - Scheduler
+
+on: 
+  schedule:
+    - cron: "0 23 5 8 3"
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout/Clone do projeto
+        uses: actions/checkout@v7
+
+      - name: Instalar dependencias do projeto
+        run: npm install  
+
+      - name: Testar acesso ao site
+        run: curl -I https://automationpratice.com.br/
+
+      - name: Run testes
+        uses: cypress-io/github-action@v7
+        with:
+          record: true
+        env: 
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: upload relatório
+        uses: actions/upload-artifact@v7
+        with:
+          name: Relatório
+          path: cypress/reports/html    
