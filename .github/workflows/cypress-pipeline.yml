@@ -12,9 +12,15 @@ jobs:
       - name: Checkout/Clone do projeto
         uses: actions/checkout@v7
 
+      - name: Instalar dependencias do projeto
+        run: npm install  
+
+      - name: Testar acesso ao site
+        run: curl -I https://automationpratice.com.br/
+
       - name: Run testes
         uses: cypress-io/github-action@v7
         with:
           record: true
         env: 
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}       
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}    
